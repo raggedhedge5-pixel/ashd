@@ -1,0 +1,57 @@
+# ============================================
+#  TimeSMP combat-log configuration
+#  (kept separate from config.yml so this whole feature is easy to find/edit
+#  on its own - none of these settings touch the time economy directly)
+# ============================================
+
+# How long a combat tag lasts, in seconds. Getting hit by another player refreshes
+# it back up to this full amount every time (it does not stack/extend beyond it).
+combat-duration-seconds: 30
+
+# Shows a countdown above the hotbar (action bar) the whole time you're tagged.
+show-actionbar: true
+
+# While tagged and you actually try to throw a pearl / swing a mace, that use gets
+# blocked and a cooldown of this length (seconds) is applied AT THAT MOMENT - not
+# proactively when the tag starts, so the cooldown swirl only ever shows up from
+# trying to use one, never just from getting hit.
+# Pearls are genuinely blocked: vanilla's real item-cooldown system (the red swirl)
+# plus an explicit cancel on the throw itself, covering the pearl whether it's in
+# your main hand or your offhand.
+# Mace ONLY gets the same cosmetic cooldown swirl - it is NOT actually blocked from
+# attacking. Elytra is the only hard block in this whole system (see block-elytra
+# below); everything else (pearl, mace) is a cooldown, not a ban.
+pearl-cooldown-seconds: 30
+mace-cooldown-seconds: 30
+
+# The ONLY hard block: cancels starting to glide with an Elytra entirely while
+# tagged (can't combat-log by flying away either).
+block-elytra: true
+
+# While tagged, every command is blocked except /msg - no /tpa, /spawn, /home,
+# /warp, etc. to dodge a fight. Players with timesmp.admin bypass this.
+# (Dying immediately clears your own combat tag, so this never lingers past a death.)
+
+# If true, a player who disconnects while still tagged is treated as having died
+# right then: their real inventory AND their TimeSMP extra-inventory (if any) drop
+# on the ground where they stood, and whoever tagged them most recently still gets
+# the normal kill-steal (see kill-reward-hours / min-time-hours in config.yml) -
+# applied immediately on the disconnect, not deferred until they log back in.
+# The time-steal part still only happens if the main timer is RUNNING (same rule
+# as a normal kill) - the item-drop punishment happens regardless of that.
+punish-combat-log: true
+
+# Worlds where the ENTIRE combat-log system is off - no tagging, no cooldowns, no
+# elytra block, no log-out punishment. This is a SEPARATE list from disabled-worlds
+# in config.yml on purpose, so a world can have the time economy off but combat-tag
+# rules still on, or vice versa, independently.
+disabled-worlds: []
+
+# WorldGuard integration - does nothing if WorldGuard isn't installed (checked
+# safely, won't error). Combat-tagged players get bounced back out if they try to
+# walk into any of these WorldGuard region IDs (e.g. your spawn/safezone region).
+# This is unrelated to WorldGuard's own "pvp" flag - a region with pvp deny already
+# stops damage/tagging on its own; this list is for blocking ENTRY while tagged,
+# even into a region where PVP itself might still be allowed.
+worldguard:
+  blocked-regions: []

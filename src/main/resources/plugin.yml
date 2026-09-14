@@ -1,0 +1,40 @@
+name: TimeSMP
+version: '1.0.0'
+main: com.timesmp.plugin.TimeSMP
+api-version: '1.21'
+author: TimeSMP
+description: Ranked SMP time-based progression - playtime timer, kill/death rewards, quests, leaderboard hearts.
+softdepend: [WorldGuard, PlaceholderAPI, LuckPerms]
+
+commands:
+  timesmp:
+    description: Admin commands for TimeSMP
+    usage: /timesmp <reload|settime|addtime|removetime|quest|scoreboard>
+    permission: timesmp.admin
+  playtime:
+    description: Check your (or another player's) banked time
+    usage: /playtime [player]
+  quest:
+    description: Check your current quest
+    usage: /quest
+  top:
+    description: Show the top time leaderboard
+    usage: /top
+  timeboard:
+    description: Toggle your personal sidebar scoreboard
+    usage: /timeboard
+  extrainventory:
+    description: Open your rank-based extra inventory (top 20 only)
+    usage: /extrainventory
+    aliases: [extrainv, einv, inv, inventory]
+  withdraw:
+    description: Withdraw whole hours of banked time into tradeable clock items
+    usage: /withdraw <hours>
+
+permissions:
+  timesmp.admin:
+    description: Allows use of /timesmp admin subcommands
+    default: op
+  timesmp.afk.bypass:
+    description: Exempts a player from the anti-AFK kick
+    default: op
